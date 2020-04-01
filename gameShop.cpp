@@ -5,9 +5,9 @@ struct GAMESHOP {
 	string nameGame = "";
 	float price;
 	int year;
-	int sales = 0;
+	int sales;
 	string company = "";
-	int gameSize = 0;
+	int gameSize;
 	string reviews = "";
 };
 
