@@ -12,6 +12,8 @@ struct GAMESHOP {
 	int gameCount = 0;
 };
 
+//test2 when confg is in
+
 void addGame(GAMESHOP game[], int& gameCount) {
 	cout << "Enter the name of game: ";
 	cin >> game[gameCount].nameGame;
