@@ -19,7 +19,7 @@ void addGame(GAMESHOP game[], int& gameCount) {
 	cout << "Enter the price of the game: ";
 	cin >> game[gameCount].price;
 	cout << endl;
-	cout << "Enter the publish year: ";
+	cout << "Enter the publishing year: ";
 	cin >> game[gameCount].year;
 	cout << endl;
 	cout << "Enter how many copies have been sold: ";
