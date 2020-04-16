@@ -1,15 +1,18 @@
 #include <iostream>
 #include <string>
-
+#include<string.h>
 using namespace std;
+
+//****************************
+//*********Data layer*********
 
 struct GAMESHOP {
 	string nameGame = "";
 	float price = 0.000000000;
 	int year = 0;
-	int sales = 0;
+	long long int sales = 0;
 	string company = "";
-	float gameSize = 0.00000;
+	float gameSize = 0.00000;//in GB
 	string reviews = "";
 	int gameInd = 0;
 };
@@ -17,7 +20,8 @@ struct GAMESHOP {
 
 void addGame(GAMESHOP game[], int& gameCount) {
 	cout << "Enter the name of the game: ";
-	cin >> game[gameCount].nameGame;
+	cin.ignore();
+	getline(cin, game[gameCount].nameGame);
 	cout << endl;
 	cout << "Enter the price of the game: ";
 	cin >> game[gameCount].price;
@@ -29,34 +33,20 @@ void addGame(GAMESHOP game[], int& gameCount) {
 	cin >> game[gameCount].sales;
 	cout << endl;
 	cout << "Enter the name of the company creator: ";
-	cin >> game[gameCount].company;
+	cin.ignore();
+	getline(cin, game[gameCount].company);
 	cout << endl;
 	cout << "Enter the size of the game: ";
 	cin >> game[gameCount].gameSize;
 	cout << endl;
 	cout << "Enter the review of the game: ";
-	cin >> game[gameCount].reviews;
+	cin.ignore();
+	getline(cin, game[gameCount].reviews);
 	cout << endl;
 
 	gameCount++;
 }
 
-void showGames(GAMESHOP* game, int& gameCount) {
-	if (gameCount == 0) {
-		cout << "There are no games"<<endl;
-	}
-	for (int i = 0; i < gameCount; i++){
-		cout <<"ID of the game: "<<i<<endl;
-		cout <<"The name of the game: "<< game[i].nameGame << endl;
-		cout <<"The price of the game: "<< game[i].price << endl;
-		cout <<"The publishing year: "<< game[i].year << endl;
-		cout <<"Copies that were sold :"<<game[i].sales << endl;
-		cout <<"The name of the company creator :"<< game[i].company << endl;
-		cout <<"Size of the game: "<< game[i].gameSize << endl;
-		cout <<"Review of the game: "<< game[i].reviews << endl;
-		cout << endl;
-	}
-}
 
 int chooseInd(GAMESHOP* game, int& gameCount, int ind) {
 	for (int i = 0; i < gameCount; i++) {
@@ -142,8 +132,9 @@ int searchGamesByReview(GAMESHOP* game, int& gameCount, GAMESHOP* gameRes, strin
 void searchByReviewMenu(GAMESHOP* game, int& gameCount) {
 	GAMESHOP dataGiven[100];
 	string criteria;
-	cout << "Enter the year you want to search by:";
-	cin >> criteria;
+	cout << "Enter the review you want to search by:";
+	cin.ignore();
+	getline(cin, criteria);
 
 	int counterOfCrit = searchGamesByReview(game, gameCount, dataGiven, criteria);
 
@@ -248,7 +239,8 @@ void searchByCompanyMenu(GAMESHOP* game, int& gameCount) {
 	GAMESHOP dataGiven[100];
 	string criteria;
 	cout << "Enter the company you want to search by:";
-	cin >> criteria;
+	cin.ignore();
+	getline(cin, criteria);
 
 	int counterOfCrit = searchGamesByCompany(game, gameCount, dataGiven, criteria);
 
@@ -257,11 +249,126 @@ void searchByCompanyMenu(GAMESHOP* game, int& gameCount) {
 }
 
 
-void search(GAMESHOP* game, int& gameCount){
+
+
+void editPrice(GAMESHOP* game, int& gameCount) {
+	int ID;
+	float newPrice;
+
+	cout << "Enter an ID: ";
+	cin >> ID;
+	cout << "Enter the new price: ";
+	cin >> newPrice;
+
+	game[ID].price = newPrice;
+}
+
+void editYear(GAMESHOP* game, int& gameCount) {
+	int ID;
+	int newYear;
+
+	cout << "Enter an ID: ";
+	cin >> ID;
+	cout << "Enter the new year: ";
+	cin >> newYear;
+
+	game[ID].year = newYear;
+}
+
+void editCompany(GAMESHOP* game, int& gameCount) {
+	int ID;
+	string newCompany;
+
+	cout << "Enter an ID: ";
+	cin >> ID;
+	cout << "Enter the new name of the company: ";
+	cin.ignore();
+	getline(cin, newCompany);
+
+	game[ID].company = newCompany;
+}
+
+void editName(GAMESHOP* game, int& gameCount) {
+	int ID;
+	string newName;
+
+	cout << "Enter an ID: ";
+	cin >> ID;
+	cout << "Enter the new name: ";
+	cin.ignore();
+	getline(cin, newName);
+
+	game[ID].nameGame = newName;
+}
+
+void editSize(GAMESHOP* game, int& gameCount) {
+	int ID;
+	float newSize;
+
+	cout << "Enter an ID: ";
+	cin >> ID;
+	cout << "Enter the new size: ";
+	cin >> newSize;
+
+	game[ID].gameSize = newSize;
+}
+
+void editSales(GAMESHOP* game, int& gameCount) {
+	int ID;
+	int newSales;
+
+	cout << "Enter an ID: ";
+	cin >> ID;
+	cout << "Enter the new sales: ";
+	cin >> newSales;
+
+	game[ID].sales = newSales;
+}
+
+void editReview(GAMESHOP* game, int& gameCount) {
+	int ID;
+	string newReview;
+
+	cout << "Enter an ID: ";
+	cin >> ID;
+	cout << "Enter the new review: ";
+	cin.ignore();
+	getline(cin, newReview);
+
+	game[ID].reviews = newReview;
+}
+
+//************************************
+//*********Presentation Layer*********
+
+void showGames(GAMESHOP* game, int& gameCount) {
+	if (gameCount == 0) {
+		cout << "There are no games" << endl;
+	}
+	for (int i = 0; i < gameCount; i++) {
+		cout << "ID of the game: " << i << endl;
+		cout << "The name of the game: " << game[i].nameGame << endl;
+		cout << "The price of the game: " << game[i].price << endl;
+		cout << "The publishing year: " << game[i].year << endl;
+		cout << "Copies that were sold: " << game[i].sales << endl;
+		cout << "The name of the company creator: " << game[i].company << endl;
+		cout << "Size of the game: " << game[i].gameSize << endl;
+		cout << "Review of the game: " << game[i].reviews << endl;
+		cout << endl;
+	}
+}
+
+void search(GAMESHOP* game, int& gameCount) {
 	string criteria;
+	cout << endl;
+	cout << "*******************************" << endl;
+	cout << "*                             *" << endl;
+	cout << "*        Search a game        *" << endl;
+	cout << "*                             *" << endl;
+	cout << "*******************************" << endl;
 	cout << "Enter your criteria" << endl;
 	cin >> criteria;
-	if (criteria == "year" or criteria=="Year"){
+	if (criteria == "year" or criteria == "Year") {
 		searchByYearMenu(game, gameCount);
 	}
 	else if (criteria == "review" or criteria == "Review") {
@@ -280,19 +387,55 @@ void search(GAMESHOP* game, int& gameCount){
 }
 
 
+void editMenu(GAMESHOP* game, int& gameCount) {
+	string criteria1;
+	cout << endl;
+	cout << "*******************************" << endl;
+	cout << "*                             *" << endl;
+	cout << "*         Edit a game         *" << endl;
+	cout << "*                             *" << endl;
+	cout << "*******************************" << endl;
+	cout << "Enter criteria1 to edit\n";
+	cin >> criteria1;
+	if (criteria1 == "price" or criteria1 == "Price") {
+		editPrice(game, gameCount);
+	}
+	else if (criteria1 == "year" or criteria1 == "Year") {
+		editYear(game, gameCount);
+	}
+	else if (criteria1 == "review" or criteria1 == "Review") {
+		editReview(game, gameCount);
+	}
+	else if (criteria1 == "sales" or criteria1 == "Sales") {
+		editSales(game, gameCount);
+	}
+	else if (criteria1 == "company" or criteria1 == "Company") {
+		editCompany(game, gameCount);
+	}
+	else if (criteria1 == "size" or criteria1 == "Size") {
+		editSize(game, gameCount);
+	}
+
+}
+
+
 
 bool mainMenu(GAMESHOP game[], int& gameCount) {
+	int choice;
+	string exit;
 	cout << endl;
 	cout << "*******************************" <<endl;
 	cout << "*                             *" <<endl;
 	cout << "*     Welcome to our Shop     *" << endl;
 	cout << "*                             *" << endl;
 	cout << "*******************************" << endl;
-	int choice;
+	cout << "Type, Year, Price, Sales, Company, Size, Review, if you want to search by or edit them";
+	cout << "To leave the shop, please type Yes or Y" << endl;
 	cout << "1. Add a game" << endl;
 	cout << "2. Show all games" << endl;
 	cout << "3. Buy a game" << endl;
 	cout << "4. Search a game by criteria" << endl;
+	cout << "5. Edit a game info" << endl;
 	cout << "99. Leave the shop" << endl;
 	cout << "Choose your option: ";
 	cin >> choice;
@@ -311,8 +454,19 @@ bool mainMenu(GAMESHOP game[], int& gameCount) {
 	case 4:
 		search(game, gameCount);
 		break;
+	case 5:
+		showGames(game, gameCount);
+		editMenu(game, gameCount);
+		break;
 	case 99:
-		return false;
+		cout << "Are you sure???" << endl;
+		cin >> exit;
+		if (exit == "yes" or exit == "Yes" or exit == "y" or exit == "Y") {
+			return false;
+		}
+		else if(exit=="No" or exit =="no" or exit=="n" or exit=="N"){
+			return true;
+		}
 	}
 	return true;
 }
@@ -325,6 +479,4 @@ int main()
 	do{
 		exit = mainMenu(game, gameCount);
 	} while (exit!=false);
-
-
 }
