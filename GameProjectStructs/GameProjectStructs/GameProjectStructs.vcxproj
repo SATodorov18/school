@@ -151,7 +151,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Editors.cpp" />
     <ClCompile Include="GameProjectStructs.cpp" />
+    <ClCompile Include="Searchers.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="editors.h" />
+    <ClInclude Include="searchers.h" />
+    <ClInclude Include="structures.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
